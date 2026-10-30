@@ -1,0 +1,1 @@
+export default function Loading(){return <div style={{position:'fixed',inset:0,background:'#080808',display:'grid',placeContent:'center',zIndex:100}} role="status"><strong style={{color:'#ff5a1f',fontSize:32,letterSpacing:6}}>IRON PULSE</strong><p style={{color:'#aaa',fontSize:11,letterSpacing:3}}>PREPARING YOUR NEXT LEVEL</p></div>}

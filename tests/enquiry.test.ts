@@ -1,0 +1,4 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {validateEnquiry} from '../lib/enquiry.ts';
+const valid={name:'Demo Member',email:'member@example.com',phone:'+919876543210',membership:'PRO',program:'Strength training',message:'Interested in a tour',consent:'yes'};
+test('valid payload is normalized and strips unknown fields',()=>{const r=validateEnquiry({...valid,name:' Demo Member ',extra:'discard'});assert.equal(r.ok,true);if(r.ok){assert.equal(r.data.name,'Demo Member');assert.equal('extra' in r.data,false)}});
+test('rejects malformed, unsupported and oversized submissions',()=>{for(const data of [null,[],{...valid,email:'bad'},{...valid,phone:'--------'},{...valid,membership:'FREE'},{...valid,program:'unknown'},{...valid,consent:''},{...valid,message:'a'.repeat(2001)},{...valid,website:'spam'}])assert.equal(validateEnquiry(data).ok,false)});
